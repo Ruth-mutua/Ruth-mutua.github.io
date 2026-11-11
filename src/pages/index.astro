@@ -1,0 +1,259 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
+import Icon from '../components/Icon.astro';
+import OffTheClock from '../components/OffTheClock.astro';
+import { articles } from '../data/writing';
+import { certifications, skillBadges, openSource } from '../data/credentials';
+import { stack, stats } from '../data/stack';
+import { capabilities } from '../data/capabilities';
+
+const current = articles.filter((a) => !a.early);
+const early = articles.filter((a) => a.early);
+
+// Drop a photo at src/assets/portrait.(jpg|png|webp) and it replaces the initials.
+const photos = import.meta.glob<{ default: ImageMetadata }>('../assets/portrait.{jpg,jpeg,png,webp}', { eager: true });
+const portrait = Object.values(photos)[0]?.default;
+---
+
+<Base>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="reveal">
+        <span class="pill"><span class="dot"></span>Nairobi, Kenya · Remote</span>
+        <p class="hello">Hi, I'm Ruth Mutua <span aria-hidden="true">👋</span></p>
+        <h1 aria-label="Kubernetes, Terraform, infrastructure, and the art of not getting paged.">
+          <span class="typed" aria-hidden="true" data-words="Kubernetes,Terraform,Infrastructure,Cloud security,CI/CD,Cloudflare">Kubernetes</span><span class="caret" aria-hidden="true"></span>
+          <span class="line2" aria-hidden="true">and the art of <span class="grad-text">not getting paged.</span></span>
+        </h1>
+        <p class="role">Platform &amp; Cloud Engineer</p>
+        <p class="intro">
+          Kubernetes in production, infrastructure as code, CI/CD, security hardening and incident response
+          across AWS, Azure and GCP. Focused on systems that are secure by default, automated end to end, and easy
+          for the next engineer to pick up.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#work">View my work</a>
+          <a class="btn" href="mailto:crnmndinda@gmail.com?subject=CV%20request">Request my CV</a>
+        </div>
+      </div>
+
+      <div class="terminal reveal" aria-label="Profile summary">
+        <div class="bar">
+          <i style="background:#f87171"></i><i style="background:#fbbf24"></i><i style="background:#34d399"></i>
+          <span class="t">~/ruth</span>
+        </div>
+<pre><span class="p">$</span> whoami
+ruth-mutua
+<span class="p">$</span> cat profile.yaml
+<span class="k">role</span>: <span class="s">platform &amp; cloud engineer</span>
+<span class="k">location</span>: <span class="s">Nairobi, Kenya · EAT (UTC+3)</span>
+<span class="k">clouds</span>: [<span class="c">aws</span>, <span class="c">azure</span>, <span class="c">gcp</span>]
+<span class="k">editors</span>: [<span class="c">vim</span>, <span class="c">vscode</span>]
+<span class="k">focus</span>:
+  - <span class="s">kubernetes in production</span>
+  - <span class="s">infrastructure as code</span>
+  - <span class="s">cloud security &amp; compliance</span>
+  - <span class="s">incident response</span>
+<span class="p">$</span> <span class="cursor"></span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="container">
+    <div class="stats reveal">
+      {stats.map((s) => (
+        <div class="stat">
+          <div class="n grad-text">{s.n}</div>
+          <div class="l">{s.l}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- What I do -->
+  <section id="work">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">// what i do</span>
+        <h2>Capabilities</h2>
+        <p>The kind of work I do, and how I approach it.</p>
+      </div>
+      <div class="work-grid">
+        {capabilities.map((c, i) => (
+          <div class={`work-card reveal${i === 0 ? ' featured' : ''}`}>
+            <div class="cover"><Cover id={c.id} /></div>
+            <div class="body">
+              <ul class="tags">{c.tools.map((t) => <li>{t}</li>)}</ul>
+              <h3>{c.title}</h3>
+              <p>{c.blurb}</p>
+              {c.article && (
+                <a class="more" href={c.article.url} target="_blank" rel="noopener">Related: {c.article.title} ↗</a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack -->
+  <section id="stack">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">// stack</span>
+        <h2>Tools I work with</h2>
+        <p>What I use day to day to build, ship and operate infrastructure.</p>
+      </div>
+      <div class="stack-groups">
+        {stack.map((g) => (
+          <div class="stack-group reveal">
+            <h3>{g.group}</h3>
+            <div class="chips">
+              {g.items.map(([icon, label]) => (
+                <span class="chip"><Icon name={icon} />{label}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section id="writing">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">// writing</span>
+        <h2>Notes from production</h2>
+        <p>What broke, why, and what I'd do differently.</p>
+      </div>
+      <div class="card-grid two">
+        {current.map((a) => (
+          <a class="card reveal" href={a.url} target="_blank" rel="noopener">
+            <span class="meta"><Icon name="linkedin" />LinkedIn · {a.date}</span>
+            <h3>{a.title}</h3>
+            <p>{a.blurb}</p>
+            <span class="arrow">Read article ↗</span>
+          </a>
+        ))}
+        {early.map((a) => (
+          <a class="card reveal" href={a.url} target="_blank" rel="noopener">
+            <span class="meta"><Icon name="linkedin" />Earlier · {a.date}</span>
+            <h3>{a.title}</h3>
+            <p>{a.blurb}</p>
+            <span class="arrow">Read article ↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Open source + certifications -->
+  <section id="credentials">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="kicker">// open source</span>
+        <h2>Open source</h2>
+      </div>
+      <div class="card-grid two">
+        {openSource.map((o) => (
+          <div class="card reveal">
+            <span class="meta"><Icon name="github" mono />{o.role}</span>
+            <h3>{o.name}</h3>
+            <p>{o.text}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="section-head reveal" style="margin-top:4.5rem">
+        <span class="kicker">// certifications</span>
+        <h2>Certifications</h2>
+      </div>
+      <div class="card-grid two">
+        {certifications.map((c) => {
+          const logo = c.name.startsWith('AWS') ? 'aws' : 'googlecloud';
+          const inner = (
+            <>
+              <div class="logo">{logo === 'aws' ? <span class="aws">aws</span> : <Icon name="googlecloud" />}</div>
+              <div>
+                <h3>{c.name}</h3>
+                <span class="verify">{c.url ? 'verify on Credly ↗' : c.note}</span>
+              </div>
+            </>
+          );
+          return c.url ? (
+            <a class="card cert reveal" href={c.url} target="_blank" rel="noopener">{inner}</a>
+          ) : (
+            <div class="card cert reveal">{inner}</div>
+          );
+        })}
+      </div>
+      <h3 class="badges-head reveal">Google Cloud skill badges</h3>
+      <div class="chips reveal">
+        {skillBadges.map((b) => (
+          <a class="chip" href={b.url} target="_blank" rel="noopener"><Icon name="googlecloud" />{b.name}</a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container about">
+      <div class="portrait reveal">
+        {portrait ? (
+          <Image src={portrait} alt="Ruth Ndinda Mutua" widths={[400, 800]} sizes="(max-width: 900px) 22rem, 28rem" />
+        ) : (
+          <span class="initials grad-text">RM</span>
+        )}
+        <span class="pill caption"><span class="dot"></span>Nairobi, Kenya</span>
+      </div>
+      <div class="about-text reveal">
+        <span class="kicker">// about</span>
+        <div class="section-head" style="margin-bottom:1.5rem"><h2>About me</h2></div>
+        <p>
+          I'm a platform and cloud engineer. I'm comfortable stepping into an existing system, reading the
+          code, configs and monitoring, and finding the actual root cause rather than patching symptoms.
+        </p>
+        <p>
+          I document as I go, with runbooks, architecture decisions and postmortems, and I use AI tools daily,
+          mostly in manual mode, reviewing each step and approving every change.
+        </p>
+        <ul class="focus">
+          <li><span><strong>Kubernetes in production:</strong> deployments, autoscaling, networking, disaster recovery</span></li>
+          <li><span><strong>Infrastructure as code:</strong> Terraform and Kustomize across staging, production and DR</span></li>
+          <li><span><strong>Cloud security:</strong> network policies, workload identity, secrets, SOC 2 / ISO 27001</span></li>
+          <li><span><strong>Reliability:</strong> incident response, root-cause analysis and postmortems</span></li>
+          <li><span><strong>AI infrastructure:</strong> model gateways, inference routing, usage attribution</span></li>
+        </ul>
+        <p class="muted">
+          BSc Computer Technology, JKUAT. Outside engineering: aviation, Formula 1, golf and a lot of coffee.{' '}
+          <a href="#life">More below ↓</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <OffTheClock />
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-panel reveal">
+        <span class="kicker">// contact</span>
+        <h2>Let's <span class="grad-text">talk</span></h2>
+        <p>Have a role, a project or a question about infrastructure? I'm happy to hear from you.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="mailto:crnmndinda@gmail.com"><Icon name="mail" />crnmndinda@gmail.com</a>
+          <a class="btn" href="https://www.linkedin.com/in/ruth-mutua-19a66b1b8" target="_blank" rel="noopener"><Icon name="linkedin" />LinkedIn</a>
+          <a class="btn" href="https://github.com/Ruth-mutua/" target="_blank" rel="noopener"><Icon name="github" mono />GitHub</a>
+          <a class="btn" href="mailto:crnmndinda@gmail.com?subject=CV%20request">Request my CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

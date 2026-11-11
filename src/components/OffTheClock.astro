@@ -1,0 +1,356 @@
+---
+// "Beyond the terminal": one full-width chapter per interest, illustration on one side,
+// story on the other, alternating left/right.
+---
+
+<section id="life" class="life">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">// off the clock</span>
+      <h2>Beyond the <span class="grad-text">terminal</span></h2>
+      <p><code class="conf">$ cat /etc/ruth.conf</code> The config that makes me, me.</p>
+    </div>
+
+    <!-- Aviation -->
+    <article class="chapter reveal">
+      <div class="art">
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="av-trail" x1="0" x2="1">
+              <stop offset="0" stop-color="#22d3ee" stop-opacity="0" />
+              <stop offset="1" stop-color="#c084fc" />
+            </linearGradient>
+            <linearGradient id="av-g" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee" /><stop offset="1" stop-color="#c084fc" /></linearGradient>
+            <linearGradient id="av-body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1f5f9" /><stop offset="1" stop-color="#cbd5e1" /></linearGradient>
+          </defs>
+          <!-- ground + runway (side view) -->
+          <rect x="0" y="304" width="600" height="76" fill="#0b1220" />
+          <rect x="0" y="298" width="600" height="8" fill="#1e293b" />
+          <g stroke="#e7ecf3" stroke-opacity="0.45" stroke-width="2">
+            <line x1="40" y1="302" x2="60" y2="302" /><line x1="90" y1="302" x2="110" y2="302" /><line x1="140" y1="302" x2="160" y2="302" /><line x1="190" y1="302" x2="210" y2="302" /><line x1="240" y1="302" x2="260" y2="302" /><line x1="290" y1="302" x2="310" y2="302" /><line x1="340" y1="302" x2="360" y2="302" />
+          </g>
+          <g fill="#fbbf24">
+            {Array.from({ length: 12 }).map((_, i) => <circle class="rwy-light" cx={20 + i * 50} cy="296" r="2.2" style={`animation-delay:${i * 0.15}s`} />)}
+          </g>
+          <!-- control tower -->
+          <g transform="translate(470 210)" fill="#152036" stroke="#334155" stroke-width="1.5">
+            <rect x="14" y="30" width="16" height="58" />
+            <path d="M0 30 L44 30 L38 6 L6 6 Z" />
+            <rect x="8" y="12" width="28" height="12" fill="#22d3ee" fill-opacity="0.35" stroke="none" />
+            <line x1="22" y1="6" x2="22" y2="-6" />
+            <circle class="beacon" cx="22" cy="-8" r="3" fill="#f87171" stroke="none" />
+          </g>
+          <!-- windsock -->
+          <g transform="translate(420 248)">
+            <line x1="0" y1="0" x2="0" y2="50" stroke="#94a3b8" stroke-width="2" />
+            <path class="sock" d="M0 2 L34 6 L34 14 L0 18 Z" fill="#fb923c" />
+            <path d="M11 3.3 L11 16.7 M23 4.6 L23 15.4" stroke="#fff" stroke-width="3" stroke-opacity="0.85" />
+          </g>
+          <!-- take-off path: roll along the runway, rotate, climb away -->
+          <path d="M40 288 L230 288 C 320 286, 410 200, 640 40" fill="none" stroke="url(#av-trail)" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round" />
+          <!-- small GA plane, nose pointing right -->
+          <g class="plane">
+            <g transform="translate(-6 -2)">
+              <path d="M-36 -10 L-30 -30 L-22 -30 L-14 -8 Z" fill="url(#av-g)" />
+              <path d="M-38 -6 L-20 -6" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" />
+              <path d="M-36 -4 Q-30 -12 -8 -12 L22 -12 Q34 -11 38 -3 Q36 4 22 5 L-8 5 Q-28 5 -36 -4 Z" fill="url(#av-body)" />
+              <rect x="-6" y="-17" width="30" height="4" rx="2" fill="#94a3b8" />
+              <line x1="4" y1="-13" x2="10" y2="2" stroke="#94a3b8" stroke-width="1.5" />
+              <path d="M8 -11 L22 -11 L26 -4 L8 -4 Z" fill="#22d3ee" fill-opacity="0.55" />
+              <line x1="-30" y1="-4" x2="2" y2="-4" stroke="#a78bfa" stroke-width="2" />
+              <ellipse class="prop" cx="40" cy="-3" rx="2" ry="13" fill="#e7ecf3" fill-opacity="0.35" />
+              <circle cx="39" cy="-3" r="2.5" fill="#64748b" />
+              <g fill="#334155"><line x1="0" y1="5" x2="-2" y2="11" stroke="#64748b" stroke-width="1.5" /><circle cx="-2" cy="12" r="3" /><line x1="26" y1="5" x2="28" y2="11" stroke="#64748b" stroke-width="1.5" /><circle cx="28" cy="12" r="3" /></g>
+            </g>
+          </g>
+          <!-- engine run-up soundwave -->
+          <g class="wave" transform="translate(40 70)">
+            {Array.from({ length: 22 }).map((_, i) => (
+              <rect x={i * 9} y={-((Math.sin(i * 0.9) + 1.3) * 14)} width="5" height={(Math.sin(i * 0.9) + 1.3) * 28} rx="2.5" fill="url(#av-g)" style={`animation-delay:${(i % 6) * 0.12}s`} />
+            ))}
+            <text x="0" y="62" font-family="JetBrains Mono Variable, monospace" font-size="12" fill="#94a3b8">engine run-up ♪</text>
+          </g>
+          <!-- altimeter -->
+          <g transform="translate(300 110)">
+            <circle r="40" fill="#0f1729" stroke="#334155" stroke-width="5" />
+            <circle r="40" fill="none" stroke="url(#av-g)" stroke-width="5" stroke-dasharray="180 260" stroke-linecap="round" transform="rotate(-210)" />
+            <line class="needle" x1="0" y1="0" x2="0" y2="-28" stroke="#e7ecf3" stroke-width="3" stroke-linecap="round" />
+            <circle r="4.5" fill="#e7ecf3" />
+            <text y="22" text-anchor="middle" font-family="JetBrains Mono Variable, monospace" font-size="9" fill="#94a3b8">ALT</text>
+          </g>
+        </svg>
+      </div>
+      <div class="story">
+        <span class="label">Aviation</span>
+        <h3>Aviatrix at heart</h3>
+        <p>
+          I love everything about flying: general aviation planes lined up on the apron, the sound of an engine
+          run-up, and the moment the wheels leave the runway. If something is taking off, I'm watching.
+        </p>
+        <p>
+          Aviation also shaped how I engineer. Checklists are runbooks, redundancy isn't optional, and a
+          go-around is just a clean rollback.
+        </p>
+        <p class="quote">
+          “The only time you have too much fuel is when you're on fire.”
+        </p>
+        <span class="mono">fuel: 100LL · favourite_sound: engine_run_up</span>
+      </div>
+    </article>
+
+    <!-- GIAA -->
+    <article class="chapter reveal">
+      <div class="art">
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs>
+            <linearGradient id="gi-g" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee" /><stop offset="1" stop-color="#c084fc" /></linearGradient>
+            <radialGradient id="gi-glow"><stop offset="0" stop-color="#c084fc" stop-opacity="0.35" /><stop offset="1" stop-color="#c084fc" stop-opacity="0" /></radialGradient>
+          </defs>
+          <circle cx="300" cy="190" r="150" fill="url(#gi-glow)" />
+          <!-- community ring -->
+          <circle cx="300" cy="190" r="125" fill="none" stroke="#818cf8" stroke-opacity="0.35" stroke-width="1.5" stroke-dasharray="3 7" />
+          {Array.from({ length: 8 }).map((_, i) => {
+            const a = (i / 8) * Math.PI * 2 - Math.PI / 2;
+            const x = 300 + Math.cos(a) * 125;
+            const y = 190 + Math.sin(a) * 125;
+            const fills = ['#22d3ee', '#a78bfa', '#f472b6', '#34d399', '#fbbf24', '#60a5fa', '#c084fc', '#2dd4bf'];
+            return (
+              <g class="member" transform={`translate(${x} ${y})`} style={`animation-delay:${i * 0.35}s`}>
+                <circle r="24" fill="#0f1729" stroke={fills[i]} stroke-opacity="0.8" stroke-width="2" />
+                <circle cy="-6" r="7.5" fill={fills[i]} fill-opacity="0.85" />
+                <path d="M-13 14 Q-13 2 0 2 Q13 2 13 14 Z" fill={fills[i]} fill-opacity="0.85" />
+              </g>
+            );
+          })}
+          <!-- paper plane circling the community -->
+          <g class="paper"><path d="M0 0 L-18 -8 L-12 0 L-18 8 Z M-12 0 L-18 8 L-8 2 Z" fill="#e7ecf3" /></g>
+          <!-- pilot wings + heart badge -->
+          <g transform="translate(300 190)">
+            <path d="M-18 -4 C -40 -20, -80 -16, -104 -6 C -80 -4, -60 0, -50 4 C -66 6, -78 10, -86 16 C -60 16, -36 12, -18 6 Z" fill="url(#gi-g)" />
+            <path d="M18 -4 C 40 -20, 80 -16, 104 -6 C 80 -4, 60 0, 50 4 C 66 6, 78 10, 86 16 C 60 16, 36 12, 18 6 Z" fill="url(#gi-g)" />
+            <circle r="28" fill="#0f1729" stroke="url(#gi-g)" stroke-width="3" />
+            <path class="heart" d="M0 12 C -18 0, -16 -14, -7 -14 C -3 -14, 0 -10, 0 -8 C 0 -10, 3 -14, 7 -14 C 16 -14, 18 0, 0 12 Z" fill="#f472b6" />
+          </g>
+          <!-- rising hearts -->
+          {[[200, 300, 0], [410, 280, 1.2], [470, 120, 2.1], [140, 140, 0.6]].map(([x, y, d]) => (
+            <path class="float" transform={`translate(${x} ${y})`} style={`animation-delay:${d}s`} d="M0 6 C -9 0, -8 -7, -3.5 -7 C -1.5 -7, 0 -5, 0 -4 C 0 -5, 1.5 -7, 3.5 -7 C 8 -7, 9 0, 0 6 Z" fill="#f472b6" fill-opacity="0.7" />
+          ))}
+          <!-- chips -->
+          <g font-family="JetBrains Mono Variable, monospace" font-size="11">
+            <g transform="translate(26 30)"><rect width="104" height="24" rx="12" fill="#0f1729" stroke="#22d3ee" stroke-opacity="0.4" /><text x="52" y="16" text-anchor="middle" fill="#67e8f9">mentorship</text></g>
+            <g transform="translate(476 30)"><rect width="98" height="24" rx="12" fill="#0f1729" stroke="#f472b6" stroke-opacity="0.45" /><text x="49" y="16" text-anchor="middle" fill="#f9a8d4">welfare</text></g>
+            <g transform="translate(250 346)"><rect width="100" height="24" rx="12" fill="#0f1729" stroke="#a78bfa" stroke-opacity="0.45" /><text x="50" y="16" text-anchor="middle" fill="#c4b5fd">community</text></g>
+          </g>
+        </svg>
+      </div>
+      <div class="story">
+        <span class="label">Girls in Aviation Africa</span>
+        <h3>Membership Welfare Manager</h3>
+        <p>
+          I run membership for a pan-African community getting more girls and women into cockpits, hangars and
+          control towers: welcoming new members, looking after their welfare, and keeping everyone connected.
+        </p>
+        <p>
+          And whenever the community needs something new online, from a quick update to a full refresh before
+          the Girls Airshow Africa, <strong>giaa.africa</strong> is my favourite side project.
+        </p>
+        <a class="go" href="https://giaa.africa" target="_blank" rel="noopener">Visit giaa.africa ↗</a>
+      </div>
+    </article>
+
+    <!-- Formula 1 -->
+    <article class="chapter reveal">
+      <div class="art f1-art">
+        <div class="lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="f1-g" x1="0" x2="1"><stop offset="0" stop-color="#22d3ee" /><stop offset="1" stop-color="#c084fc" /></linearGradient></defs>
+          <!-- track -->
+          <path id="f1-track" d="M120 250 C 60 250, 60 150, 130 140 L 260 120 C 320 110, 330 60, 400 70 C 480 80, 520 150, 470 200 L 380 260 C 340 285, 300 290, 250 280 Z" fill="none" stroke="#1e293b" stroke-width="18" stroke-linejoin="round" />
+          <path d="M120 250 C 60 250, 60 150, 130 140 L 260 120 C 320 110, 330 60, 400 70 C 480 80, 520 150, 470 200 L 380 260 C 340 285, 300 290, 250 280 Z" fill="none" stroke="url(#f1-g)" stroke-width="2" stroke-dasharray="4 8" />
+          <circle class="car" r="7" fill="#f87171" />
+          <!-- telemetry trace -->
+          <g transform="translate(40 300)">
+            <path d="M0 50 L40 20 L70 22 L90 50 L120 48 L150 10 L210 8 L230 40 L260 42 L300 15 L360 12 L380 45 L420 44 L470 18 L520 16" fill="none" stroke="url(#f1-g)" stroke-width="2.5" />
+            <text x="0" y="72" font-family="JetBrains Mono Variable, monospace" font-size="11" fill="#94a3b8">speed trace · lap 42</text>
+          </g>
+        </svg>
+      </div>
+      <div class="story">
+        <span class="label">Formula 1</span>
+        <h3>Lights out and away we go</h3>
+        <p>
+          I love the thrill of Formula 1: twenty-two cars at over 300 km/h, and races won or lost by tenths of a
+          second.
+        </p>
+        <p>
+          The nerdy side hooks me even more: telemetry streaming off every car, tyre strategy that's really
+          capacity planning, and a pit wall making live calls from dashboards. It's an incident room at 300 km/h.
+        </p>
+        <span class="mono">undercut = fresh_tyres − pit_loss</span>
+      </div>
+    </article>
+
+    <!-- Golf -->
+    <article class="chapter reveal">
+      <div class="art">
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <ellipse cx="470" cy="300" rx="120" ry="34" fill="#34d399" fill-opacity="0.12" />
+          <ellipse cx="470" cy="300" rx="60" ry="16" fill="#34d399" fill-opacity="0.18" />
+          <path d="M70 300 Q 260 -30 462 296" fill="none" stroke="#94a3b8" stroke-opacity="0.55" stroke-width="2.5" stroke-dasharray="3 8" />
+          <circle class="ball" r="7" fill="#e7ecf3" />
+          <line x1="470" y1="300" x2="470" y2="170" stroke="#cbd5e1" stroke-width="3" />
+          <path class="flag" d="M470 170 L520 186 L470 202 Z" fill="#f87171" />
+          <g font-family="JetBrains Mono Variable, monospace" font-size="12" fill="#94a3b8">
+            <text x="60" y="80">y = v₀t·sinθ − ½gt²</text>
+            <text x="60" y="104">wind: 12 km/h ↗</text>
+            <text x="60" y="128">slope: 2.1° left</text>
+          </g>
+        </svg>
+      </div>
+      <div class="story">
+        <span class="label">Golf</span>
+        <h3>while (ball != hole) retry()</h3>
+        <p>Golf is my reset button: fresh air, a long walk, and a problem that looks simple and isn't.</p>
+        <p>
+          It's a non-deterministic system with one tiny target. Wind, slope and grass all change the outcome,
+          so I read greens like latency graphs and accept the occasional retry.
+        </p>
+        <span class="mono">strokes = par + ε</span>
+      </div>
+    </article>
+
+    <!-- Coffee -->
+    <article class="chapter reveal">
+      <div class="art">
+        <svg viewBox="0 0 600 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="cf-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#818cf8" /><stop offset="1" stop-color="#c084fc" /></linearGradient></defs>
+          <g transform="translate(110 110)">
+            <g class="steam" fill="none" stroke="#94a3b8" stroke-opacity="0.6" stroke-width="5" stroke-linecap="round">
+              <path d="M50 40 c-12 -16 12 -24 0 -40" /><path d="M85 40 c-12 -16 12 -24 0 -40" /><path d="M120 40 c-12 -16 12 -24 0 -40" />
+            </g>
+            <rect x="20" y="55" width="130" height="110" rx="20" fill="url(#cf-g)" />
+            <path d="M150 78 h16 a26 26 0 0 1 0 52 h-16" fill="none" stroke="#a78bfa" stroke-width="12" />
+            <ellipse cx="85" cy="185" rx="95" ry="10" fill="#000" fill-opacity="0.3" />
+          </g>
+          <g transform="translate(345 120)" font-family="JetBrains Mono Variable, monospace" font-size="13">
+            <rect x="-16" y="-28" width="230" height="150" rx="12" fill="#0f1729" stroke="#94a3b8" stroke-opacity="0.2" />
+            <text y="0" fill="#a78bfa">kind<tspan fill="#cbd5e1">: HPA</tspan></text>
+            <text y="26" fill="#a78bfa">target<tspan fill="#cbd5e1">: ruth</tspan></text>
+            <text y="52" fill="#a78bfa">minReplicas<tspan fill="#cbd5e1">: 2</tspan><tspan fill="#64708a">  # cups</tspan></text>
+            <text y="78" fill="#a78bfa">maxReplicas<tspan fill="#cbd5e1">: ∞</tspan><tspan fill="#64708a">  # on-call</tspan></text>
+          </g>
+        </svg>
+      </div>
+      <div class="story">
+        <span class="label">Coffee</span>
+        <h3>Caffeine-driven development</h3>
+        <p>
+          Every good runbook, postmortem and late-night fix I've written started with a cup of coffee. Probably
+          the second one.
+        </p>
+        <span class="mono">uptime(ruth) ∝ coffee</span>
+      </div>
+    </article>
+  </div>
+</section>
+
+<style>
+  .chapter {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 2.5rem 0;
+  }
+  .chapter + .chapter { border-top: 1px solid var(--border); }
+  .chapter:nth-of-type(even) .art { order: 2; }
+
+  .art {
+    position: relative;
+    aspect-ratio: 600 / 380;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border-strong);
+    background:
+      radial-gradient(circle at 80% 10%, rgba(192, 132, 252, 0.22), transparent 55%),
+      radial-gradient(circle at 10% 90%, rgba(34, 211, 238, 0.16), transparent 50%),
+      linear-gradient(180deg, #0c1220, #080b13);
+    box-shadow: 0 30px 80px -40px rgba(129, 140, 248, 0.45);
+  }
+  .art svg { width: 100%; height: 100%; display: block; }
+
+  .story { display: flex; flex-direction: column; gap: 0.9rem; }
+  .story h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .story p { margin: 0; color: #c3cbd8; font-size: 1.04rem; }
+  .story p strong { color: var(--text); }
+  .label { font-family: var(--mono); font-size: 0.78rem; color: var(--cyan); letter-spacing: 0.06em; text-transform: uppercase; }
+  .mono {
+    align-self: flex-start;
+    font-family: var(--mono); font-size: 0.8rem; color: var(--violet);
+    background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.22);
+    padding: 0.3rem 0.7rem; border-radius: 8px;
+  }
+  .go { font-weight: 550; }
+  .story p.quote { font-style: italic; color: var(--muted); border-left: 3px solid var(--violet); padding-left: 0.9rem; }
+  .conf { font-family: var(--mono); font-size: 0.85em; color: var(--cyan); background: rgba(34, 211, 238, 0.08); border: 1px solid rgba(34, 211, 238, 0.2); padding: 0.15rem 0.5rem; border-radius: 6px; margin-right: 0.4rem; }
+
+  /* Aviation */
+  .plane { offset-path: path('M40 288 L230 288 C 320 286, 410 200, 640 40'); offset-rotate: auto; animation: takeoff 7s cubic-bezier(0.45, 0, 0.8, 0.6) infinite; }
+  @keyframes takeoff { 0% { offset-distance: 0%; opacity: 0; } 6% { opacity: 1; } 92% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
+  .prop { animation: spin 0.12s linear infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes spin { 50% { transform: scaleY(0.25); } }
+  .rwy-light { animation: twinkle 1.8s ease-in-out infinite; }
+  @keyframes twinkle { 50% { opacity: 0.25; } }
+  .beacon { animation: twinkle 1.2s steps(1) infinite; }
+  .sock { transform-box: fill-box; transform-origin: left center; animation: sock 2.2s ease-in-out infinite; }
+  @keyframes sock { 50% { transform: rotate(6deg) scaleX(0.92); } }
+  .wave rect { transform-box: fill-box; transform-origin: center; animation: hum 0.9s ease-in-out infinite alternate; }
+  @keyframes hum { from { transform: scaleY(0.45); } to { transform: scaleY(1); } }
+  .needle { transform-origin: 0 0; animation: climb 7s cubic-bezier(0.45, 0, 0.8, 0.6) infinite; }
+  @keyframes climb { from { transform: rotate(-120deg); } to { transform: rotate(110deg); } }
+
+  /* GIAA */
+  .member { animation: bob 3.2s ease-in-out infinite; }
+  @keyframes bob { 50% { translate: 0 -5px; } }
+  .paper { offset-path: path('M300 65 A125 125 0 1 1 299.9 65'); offset-rotate: auto; animation: orbit 12s linear infinite; }
+  @keyframes orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+  .heart { transform-box: fill-box; transform-origin: center; animation: beat 1.6s ease-in-out infinite; }
+  @keyframes beat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.18); } 30% { transform: scale(1); } 45% { transform: scale(1.12); } }
+  .float { animation: rise 4s ease-in-out infinite; }
+  @keyframes rise { 0% { opacity: 0; translate: 0 10px; } 30% { opacity: 1; } 100% { opacity: 0; translate: 0 -30px; } }
+
+  /* F1 */
+  .f1-art .lights { position: absolute; top: 1.2rem; left: 1.4rem; display: flex; gap: 0.5rem; z-index: 1; }
+  .f1-art .lights i { width: 1.05rem; height: 1.05rem; border-radius: 50%; background: #3b1d1d; border: 1px solid #5b2a2a; animation: light 5s steps(1) infinite; }
+  .f1-art .lights i:nth-child(2) { animation-delay: 0.4s; }
+  .f1-art .lights i:nth-child(3) { animation-delay: 0.8s; }
+  .f1-art .lights i:nth-child(4) { animation-delay: 1.2s; }
+  .f1-art .lights i:nth-child(5) { animation-delay: 1.6s; }
+  @keyframes light { 0% { background: #ef4444; box-shadow: 0 0 14px #ef4444; } 45% { background: #3b1d1d; box-shadow: none; } }
+  .car { offset-path: path('M120 250 C 60 250, 60 150, 130 140 L 260 120 C 320 110, 330 60, 400 70 C 480 80, 520 150, 470 200 L 380 260 C 340 285, 300 290, 250 280 Z'); animation: lap 5s linear infinite; filter: drop-shadow(0 0 6px #f87171); }
+  @keyframes lap { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+
+  /* Golf */
+  .ball { offset-path: path('M70 300 Q 260 -30 462 296'); animation: shot 4s ease-in-out infinite; }
+  @keyframes shot { 0%, 10% { offset-distance: 0%; } 80%, 100% { offset-distance: 100%; } }
+  .flag { transform-box: fill-box; transform-origin: left center; animation: wave 2.4s ease-in-out infinite; }
+  @keyframes wave { 50% { transform: scaleX(0.8); } }
+
+  /* Coffee */
+  .steam path { animation: steam 2.6s ease-in-out infinite; }
+  .steam path:nth-child(2) { animation-delay: 0.4s; }
+  .steam path:nth-child(3) { animation-delay: 0.8s; }
+  @keyframes steam { 0% { opacity: 0; transform: translateY(10px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-10px); } }
+
+  @media (max-width: 900px) {
+    .chapter { grid-template-columns: 1fr; gap: 1.5rem; padding: 2rem 0; }
+    .chapter:nth-of-type(even) .art { order: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plane, .wave rect, .needle, .member, .paper, .heart, .float, .prop, .rwy-light, .beacon, .sock, .f1-art .lights i, .car, .ball, .flag, .steam path { animation: none; }
+    .plane { offset-distance: 58%; }
+    .paper { offset-distance: 30%; }
+    .car { offset-distance: 30%; }
+    .ball { offset-distance: 55%; }
+  }
+</style>

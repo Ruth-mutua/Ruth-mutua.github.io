@@ -1,0 +1,46 @@
+---
+// Brand logos from simple-icons, plus a few hand-made ones that simple-icons
+// no longer ships (Azure, AWS, LinkedIn) and a plain mail icon.
+import * as si from 'simple-icons';
+
+interface Props {
+  name: string;
+  mono?: boolean;
+  size?: string;
+}
+
+const { name, mono = false, size } = Astro.props;
+const key = 'si' + name.charAt(0).toUpperCase() + name.slice(1);
+const icon = (si as Record<string, { path: string; hex: string; title: string } | undefined>)[key];
+
+// Very dark brand colours disappear on a dark background, so lighten them.
+function readable(hex: string) {
+  const n = parseInt(hex, 16);
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return lum < 70 ? '#cbd5e1' : `#${hex}`;
+}
+const style = size ? `width:${size};height:${size}` : undefined;
+---
+
+{icon ? (
+  <svg role="img" viewBox="0 0 24 24" aria-label={icon.title} style={style} fill={mono ? 'currentColor' : readable(icon.hex)}>
+    <path d={icon.path} />
+  </svg>
+) : name === 'azure' ? (
+  <span class="txt-logo" style="background:#3ba0ff">Az</span>
+) : name === 'vscode' ? (
+  <span class="txt-logo" style="background:#23a9f2">VS</span>
+) : name === 'aws' ? (
+  <span class="txt-logo" style="background:#ff9900">aws</span>
+) : name === 'linkedin' ? (
+  <svg role="img" viewBox="0 0 24 24" aria-label="LinkedIn" style={style} fill="currentColor">
+    <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3zM9.5 9.75h3.8v1.6h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.75v5.6h-4v-4.96c0-1.18-.02-2.7-1.7-2.7-1.7 0-1.96 1.28-1.96 2.6v5.06h-4z" />
+  </svg>
+) : name === 'mail' ? (
+  <svg role="img" viewBox="0 0 24 24" aria-label="Email" style={style} fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m4 7 8 6 8-6" />
+  </svg>
+) : (
+  <span class="txt-logo" style="background:#94a0b2">{name.slice(0, 3)}</span>
+)}
