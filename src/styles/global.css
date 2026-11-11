@@ -207,6 +207,7 @@ section { padding: 5.5rem 0; }
 .work-card p { color: var(--muted); margin: 0; font-size: 0.95rem; }
 .work-card .more { margin-top: auto; padding-top: 0.4rem; color: var(--cyan); font-size: 0.88rem; font-weight: 550; }
 .work-card .more:hover { color: #67e8f9; }
+.work-card .outcome { align-self: flex-start; font-family: var(--mono); font-size: 0.8rem; color: var(--violet); background: rgba(167, 139, 250, 0.08); border: 1px solid rgba(167, 139, 250, 0.22); padding: 0.25rem 0.65rem; border-radius: 8px; }
 div.work-card:hover { transform: translateY(-3px); }
 .work-card.featured { grid-column: 1 / -1; flex-direction: row; }
 .work-card.featured .cover { flex: 1.25; aspect-ratio: auto; min-height: 21rem; border-bottom: 0; border-right: 1px solid var(--border); }

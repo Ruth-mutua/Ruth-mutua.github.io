@@ -90,6 +90,7 @@ ruth-mutua
               <ul class="tags">{c.tools.map((t) => <li>{t}</li>)}</ul>
               <h3>{c.title}</h3>
               <p>{c.blurb}</p>
+              <span class="outcome">outcome: {c.outcome}</span>
               {c.article && (
                 <a class="more" href={c.article.url} target="_blank" rel="noopener">Related: {c.article.title} ↗</a>
               )}
@@ -220,8 +221,7 @@ ruth-mutua
           code, configs and monitoring, and finding the actual root cause rather than patching symptoms.
         </p>
         <p>
-          I document as I go, with runbooks, architecture decisions and postmortems, and I use AI tools daily,
-          mostly in manual mode, reviewing each step and approving every change.
+          I document as I go, with runbooks, architecture decisions and postmortems.
         </p>
         <ul class="focus">
           <li><span><strong>Kubernetes in production:</strong> deployments, autoscaling, networking, disaster recovery</span></li>
