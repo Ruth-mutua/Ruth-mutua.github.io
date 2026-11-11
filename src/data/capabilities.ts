@@ -11,6 +11,22 @@ export type Capability = {
 
 export const capabilities: Capability[] = [
   {
+    id: 'backend',
+    title: 'Backend services & APIs',
+    blurb:
+      'Services that are fast and calm to run: REST and gRPC APIs, async workers and queues, idempotent jobs that are safe to retry, and data models in PostgreSQL, Redis and MongoDB.',
+    outcome: 'APIs that scale without surprises',
+    tools: ['python / fastapi', 'go', 'node.js / express', 'java'],
+  },
+  {
+    id: 'cicd',
+    title: 'CI/CD & DevOps',
+    blurb:
+      'Pipelines that take a commit from review to production on their own: automated tests, container builds and scans, promotion through staging, and rollbacks that take one command, not one incident.',
+    outcome: 'ship often, sleep well',
+    tools: ['github actions', 'jenkins', 'bitbucket pipelines', 'docker'],
+  },
+  {
     id: 'kubernetes',
     title: 'Kubernetes platforms',
     blurb:
@@ -24,11 +40,11 @@ export const capabilities: Capability[] = [
   },
   {
     id: 'iac',
-    title: 'Infrastructure as code',
+    title: 'Infrastructure as code & multi-cloud',
     blurb:
-      'Every environment rebuildable from code. Changes are reviewed instead of clicked, staging and production don\'t drift apart, and a merge reaches production safely, so releases stop being events.',
-    outcome: 'safe, repeatable releases',
-    tools: ['terraform', 'kustomize', 'github actions', 'docker'],
+      'Every environment rebuildable from code across AWS, Azure and GCP: reusable Terraform modules, changes reviewed instead of clicked, and no drift between staging, production and DR.',
+    outcome: 'no drift, no snowflake servers',
+    tools: ['terraform', 'kustomize', 'aws · azure · gcp'],
   },
   {
     id: 'security',

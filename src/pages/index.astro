@@ -24,14 +24,14 @@ const portrait = Object.values(photos)[0]?.default;
       <div class="reveal">
         <span class="pill"><span class="dot"></span>Nairobi, Kenya · Remote</span>
         <p class="hello">Hi, I'm Ruth Mutua <span aria-hidden="true">👋</span></p>
-        <h1 aria-label="Kubernetes, Terraform, infrastructure, and the art of not getting paged.">
-          <span class="typed" aria-hidden="true" data-words="Kubernetes,Terraform,Infrastructure,Cloud security,CI/CD,Cloudflare">Kubernetes</span><span class="caret" aria-hidden="true"></span>
+        <h1 aria-label="Kubernetes, CI/CD, backend APIs, Terraform and the art of not getting paged.">
+          <span class="typed" aria-hidden="true" data-words="Kubernetes,CI/CD,Backend APIs,Terraform,Cloud security,Infrastructure">Kubernetes</span><span class="caret" aria-hidden="true"></span>
           <span class="line2" aria-hidden="true">and the art of <span class="grad-text">not getting paged.</span></span>
         </h1>
         <p class="role">Platform &amp; Cloud Engineer</p>
         <p class="intro">
-          Kubernetes in production, infrastructure as code, CI/CD, security hardening and incident response
-          across AWS, Azure and GCP. Focused on systems that are secure by default, automated end to end, and easy
+          Backend services, CI/CD, Kubernetes in production, infrastructure as code, security hardening and
+          incident response across AWS, Azure and GCP. Focused on systems that are secure by default, automated end to end, and easy
           for the next engineer to pick up.
         </p>
         <div class="actions">
@@ -53,6 +53,8 @@ ruth-mutua
 <span class="k">clouds</span>: [<span class="c">aws</span>, <span class="c">azure</span>, <span class="c">gcp</span>]
 <span class="k">editors</span>: [<span class="c">vim</span>, <span class="c">vscode</span>]
 <span class="k">focus</span>:
+  - <span class="s">backend services &amp; apis</span>
+  - <span class="s">ci/cd &amp; devops</span>
   - <span class="s">kubernetes in production</span>
   - <span class="s">infrastructure as code</span>
   - <span class="s">cloud security &amp; compliance</span>
@@ -84,7 +86,7 @@ ruth-mutua
       </div>
       <div class="work-grid">
         {capabilities.map((c, i) => (
-          <div class={`work-card reveal${i === 0 ? ' featured' : ''}`}>
+          <div class={`work-card reveal${i === capabilities.length - 1 && capabilities.length % 2 === 1 ? ' featured' : ''}`}>
             <div class="cover"><Cover id={c.id} /></div>
             <div class="body">
               <ul class="tags">{c.tools.map((t) => <li>{t}</li>)}</ul>

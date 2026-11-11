@@ -76,29 +76,94 @@ const mono = 'JetBrains Mono Variable, JetBrains Mono, Fira Code, Menlo, Consola
 
   {id === 'iac' && (
     <g font-family={mono}>
-      <g transform="translate(50 50)">
-        <rect width="460" height="300" rx="16" fill="#0f1729" stroke="#94a3b8" stroke-opacity="0.25" />
+      <g transform="translate(50 60)">
+        <rect width="400" height="290" rx="16" fill="#0f1729" stroke="#94a3b8" stroke-opacity="0.25" />
         <circle cx="20" cy="20" r="5" fill="#f87171" /><circle cx="36" cy="20" r="5" fill="#fbbf24" /><circle cx="52" cy="20" r="5" fill="#34d399" />
-        <line x1="0" y1="38" x2="460" y2="38" stroke="#94a3b8" stroke-opacity="0.15" />
-        <g font-size="13.5">
-          <text x="20" y="70" fill="#e2e8f0"><tspan fill="#34d399">$</tspan> terraform plan</text>
-          <text x="20" y="100" fill="#34d399">+ module.cluster.kubernetes_cluster</text>
-          <text x="20" y="124" fill="#34d399">+ module.network.private_endpoint</text>
-          <text x="20" y="148" fill="#fbbf24">~ module.dns.record["api"]</text>
-          <text x="20" y="178" fill="#cbd5e1">Plan: <tspan fill="#34d399">2 to add</tspan>, <tspan fill="#fbbf24">1 to change</tspan>, 0 to destroy.</text>
-          <text x="20" y="214" fill="#e2e8f0"><tspan fill="#34d399">$</tspan> kustomize build overlays/production</text>
-          <text x="20" y="244" fill="#e2e8f0"><tspan fill="#34d399">$</tspan> terraform apply</text>
-          <text x="20" y="272" fill="#34d399">Apply complete!<tspan class="cv-blink" fill="#22d3ee"> ▍</tspan></text>
+        <line x1="0" y1="38" x2="400" y2="38" stroke="#94a3b8" stroke-opacity="0.15" />
+        <g font-size="13">
+          <text x="20" y="70" fill="#a78bfa">module <tspan fill="#fcd34d">"cluster"</tspan> {'{'}</text>
+          <text x="38" y="94" fill="#cbd5e1">source  = <tspan fill="#fcd34d">"./modules/k8s"</tspan></text>
+          <text x="38" y="118" fill="#cbd5e1">env     = <tspan fill="#fcd34d">var.env</tspan></text>
+          <text x="38" y="142" fill="#cbd5e1">regions = <tspan fill="#fcd34d">["primary", "dr"]</tspan></text>
+          <text x="20" y="166" fill="#a78bfa">{'}'}</text>
+          <text x="20" y="206" fill="#e2e8f0"><tspan fill="#34d399">$</tspan> terraform apply</text>
+          <text x="20" y="232" fill="#cbd5e1">Plan: <tspan fill="#34d399">3 to add</tspan>, 0 to destroy.</text>
+          <text x="20" y="258" fill="#34d399">Apply complete!<tspan class="cv-blink" fill="#22d3ee"> ▍</tspan></text>
         </g>
       </g>
-      {['commit', 'build', 'staging', 'production'].map((s, i) => (
+      {[['AWS', '#ff9900'], ['Azure', '#3ba0ff'], ['GCP', '#4285f4']].map(([name, c], i) => (
         <g>
-          {i < 3 && <path d={`M${590} ${110 + i * 80 + 22} L590 ${110 + (i + 1) * 80 - 2}`} stroke={u('grad')} stroke-width="3" stroke-dasharray="6 6" class="cv-flow" />}
-          <rect x="545" y={88 + i * 80} width="190" height="44" rx="12" fill="#0f1729" stroke={i === 3 ? '#34d399' : '#818cf8'} stroke-opacity="0.6" />
-          <circle cx="570" cy={110 + i * 80} r="6" fill={i === 3 ? '#34d399' : '#818cf8'} class={`cv-pulse cv-d${i + 1}`} />
-          <text x="588" y={115 + i * 80} font-size="14" fill="#e2e8f0">{s}</text>
+          <path d={`M450 205 C 510 205, 520 ${110 + i * 95}, 560 ${110 + i * 95}`} fill="none" stroke={u('grad')} stroke-width="2.5" stroke-dasharray="6 6" class="cv-flow" />
+          <g transform={`translate(560 ${80 + i * 95})`}>
+            <rect width="180" height="60" rx="14" fill="#0f1729" stroke={c} stroke-opacity="0.6" />
+            <circle cx="26" cy="30" r="8" fill={c} class={`cv-pulse cv-d${i + 1}`} />
+            <text x="46" y="35" font-size="15" fill="#e2e8f0">{name}</text>
+            <text x="166" y="35" text-anchor="end" font-size="11" fill="#34d399">✓ in sync</text>
+          </g>
         </g>
       ))}
+    </g>
+  )}
+
+  {id === 'cicd' && (
+    <g font-family={mono}>
+      {['commit', 'build', 'test', 'image', 'staging', 'prod'].map((stage, i) => (
+        <g>
+          {i < 5 && <path d={`M${118 + i * 118} 120 L${168 + i * 118} 120`} stroke={u('grad')} stroke-width="3" stroke-dasharray="6 6" class="cv-flow" />}
+          <circle cx={90 + i * 118} cy="120" r="28" fill="#0f1729" stroke={i === 5 ? '#34d399' : '#818cf8'} stroke-width="2.5" />
+          <path d={`M${78 + i * 118} 120 l8 8 l16 -18`} fill="none" stroke={i === 5 ? '#34d399' : '#a78bfa'} stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class={`cv-pulse cv-d${(i % 4) + 1}`} />
+          <text x={90 + i * 118} y="174" text-anchor="middle" font-size="13" fill="#cbd5e1">{stage}</text>
+        </g>
+      ))}
+      <g transform="translate(60 210)">
+        <rect width="680" height="180" rx="16" fill="#0f1729" stroke="#94a3b8" stroke-opacity="0.22" />
+        <g font-size="13">
+          <text x="22" y="36" fill="#64708a">pipeline #482 · main · 4m 12s</text>
+          <text x="22" y="66" fill="#34d399">✓ <tspan fill="#cbd5e1">lint &amp; unit tests</tspan><tspan fill="#64708a">           212 passed</tspan></text>
+          <text x="22" y="92" fill="#34d399">✓ <tspan fill="#cbd5e1">docker build &amp; scan</tspan><tspan fill="#64708a">       0 critical</tspan></text>
+          <text x="22" y="118" fill="#34d399">✓ <tspan fill="#cbd5e1">deploy staging</tspan><tspan fill="#64708a">             smoke tests ok</tspan></text>
+          <text x="22" y="144" fill="#34d399">✓ <tspan fill="#cbd5e1">promote to production</tspan><tspan fill="#64708a">      rollout healthy</tspan><tspan class="cv-blink" fill="#22d3ee"> ▍</tspan></text>
+        </g>
+      </g>
+    </g>
+  )}
+
+  {id === 'backend' && (
+    <g font-family={mono}>
+      <g transform="translate(50 50)">
+        <rect width="390" height="310" rx="16" fill="#0f1729" stroke="#94a3b8" stroke-opacity="0.25" />
+        <text x="20" y="30" font-size="12" fill="#64708a">api/routes.py</text>
+        <line x1="0" y1="44" x2="390" y2="44" stroke="#94a3b8" stroke-opacity="0.15" />
+        <g font-size="13">
+          <text x="20" y="76" fill="#fcd34d">@router.post<tspan fill="#cbd5e1">(</tspan><tspan fill="#86efac">"/v1/bookings"</tspan><tspan fill="#cbd5e1">)</tspan></text>
+          <text x="20" y="100" fill="#a78bfa">async def <tspan fill="#67e8f9">create</tspan><tspan fill="#cbd5e1">(req: Booking):</tspan></text>
+          <text x="40" y="124" fill="#cbd5e1">key = req.idempotency_key</text>
+          <text x="40" y="148" fill="#a78bfa">if <tspan fill="#cbd5e1">await seen(key):</tspan></text>
+          <text x="60" y="172" fill="#a78bfa">return <tspan fill="#cbd5e1">await result(key)</tspan></text>
+          <text x="40" y="196" fill="#cbd5e1">job = <tspan fill="#a78bfa">await </tspan>queue.enqueue(req)</text>
+          <text x="40" y="220" fill="#a78bfa">return <tspan fill="#cbd5e1">{'{'}</tspan><tspan fill="#86efac">"id"</tspan><tspan fill="#cbd5e1">: job.id{'}'}</tspan></text>
+          <text x="20" y="270" fill="#64708a"># python · go · node · java</text>
+        </g>
+      </g>
+      <g transform="translate(470 70)" font-size="13">
+        <rect width="270" height="44" rx="12" fill="#0f1729" stroke="#22d3ee" stroke-opacity="0.45" />
+        <text x="16" y="27" fill="#67e8f9">POST <tspan fill="#cbd5e1">/v1/bookings</tspan></text>
+        <text x="254" y="27" text-anchor="end" fill="#34d399">202 · 38ms</text>
+        <path d="M135 44 L135 92" stroke={u('grad')} stroke-width="2.5" stroke-dasharray="6 6" class="cv-flow" />
+        <rect y="92" width="270" height="44" rx="12" fill="#0f1729" stroke="#a78bfa" stroke-opacity="0.5" />
+        <text x="16" y="119" fill="#c4b5fd">queue <tspan fill="#64708a">· redis</tspan></text>
+        <text x="254" y="119" text-anchor="end" fill="#94a3b8">depth 3</text>
+        {[0, 1, 2].map((w) => (
+          <g>
+            <path d={`M135 136 L${45 + w * 90} 184`} stroke={u('grad')} stroke-width="2" stroke-dasharray="6 6" class="cv-flow" />
+            <rect x={w * 90} y="184" width="88" height="40" rx="10" fill="#0f1729" stroke="#34d399" stroke-opacity="0.5" />
+            <circle cx={w * 90 + 16} cy="204" r="5" fill="#34d399" class={`cv-pulse cv-d${w + 1}`} />
+            <text x={w * 90 + 28} y="208.5" font-size="11.5" fill="#cbd5e1">{`worker ${w + 1}`}</text>
+          </g>
+        ))}
+        <rect y="244" width="270" height="44" rx="12" fill="#0f1729" stroke="#4169e1" stroke-opacity="0.6" />
+        <text x="16" y="271" fill="#93c5fd">postgres <tspan fill="#64708a">· idempotent writes</tspan></text>
+      </g>
     </g>
   )}
 
