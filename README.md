@@ -1,6 +1,6 @@
 # ruth-mutua-portfolio
 
-Personal site of Ruth Ndinda Mutua: platform & cloud engineer.
+Personal site of Ruth Mutua: platform & cloud engineer.
 
 Built with [Astro](https://astro.build) as a fully static site, with one tiny script for scroll animations.
 
